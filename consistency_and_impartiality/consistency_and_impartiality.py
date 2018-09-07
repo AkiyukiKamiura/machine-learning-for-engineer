@@ -61,31 +61,36 @@ for i in N:
     sample_sv_list.extend(list(np.random.choice(sv_list, M)))
     sample_uv_list.extend(list(np.random.choice(uv_list, M)))
 
-fig, ax = plt.subplots(ncols=2, nrows=2, figsize=(10,7), sharex=True)
-
 sample_N = []
 for i in N:
     sample_N.extend([i]*M)
 
+fig1, ax1 = plt.subplots(ncols=1, nrows=1, figsize=(5, 4))
+
 # 標本平均
-ax[0][0].plot(N, mean_sm_list, label='mean')
-ax[0][0].plot(sample_N, sample_sm_list, 'o', color='green', markersize=0.5)
-ax[0][0].set_title('Sample mean')
-ax[0][0].set_xlabel('N')
-ax[0][0].legend()
+ax1.plot(N, mean_sm_list, label='mean')
+ax1.plot(sample_N, sample_sm_list, 'o', color='green', markersize=0.5)
+ax1.set_title('Sample mean')
+ax1.set_xlabel('N')
+ax1.legend()
+
+plt.savefig('consistency_and_impartiality/mean.png')
+
+fig2, ax2 = plt.subplots(ncols=2, nrows=1, figsize=(10, 4), sharex=True)
 
 # 標本分散
-ax[1][0].plot(N, mean_sv_list, label='mean')
-ax[1][0].plot(sample_N, sample_sv_list, 'o', color='green', markersize=0.5)
-ax[1][0].set_title('Sample variance')
-ax[1][0].set_xlabel('N')
-ax[1][0].legend()
+ax2[0].plot(N, mean_sv_list, label='mean')
+ax2[0].plot(sample_N, sample_sv_list, 'o', color='green', markersize=0.5)
+ax2[0].set_title('Sample variance')
+ax2[0].set_xlabel('N')
+ax2[0].legend()
 
 # 不偏分散
-ax[1][1].plot(N, mean_uv_list, label='mean')
-ax[1][1].plot(sample_N, sample_uv_list, 'o', color='green', markersize=0.5)
-ax[1][1].set_title('Unbiased variance')
-ax[1][1].set_xlabel('N')
-ax[1][1].legend()
+ax2[1].plot(N, mean_uv_list, label='mean')
+ax2[1].plot(sample_N, sample_uv_list, 'o', color='green', markersize=0.5)
+ax2[1].set_title('Unbiased variance')
+ax2[1].set_xlabel('N')
+ax2[1].legend()
 
+plt.savefig('consistency_and_impartiality/variance.png')
 plt.show()
