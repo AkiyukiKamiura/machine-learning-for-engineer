@@ -41,15 +41,15 @@ for l in range(loop):
     param_hist.append(list(param))
     print(count)
 
-
 # 可視化
 x_line = np.linspace(-5, 5, 2)
-y_line = (param[0] + param[1]*x_line)/(-param[2])
+y_line = (c*param[0] + param[1]*x_line)/(-param[2])
 plt.plot(class_1_x, class_1_y, 'o')
 plt.plot(class_2_x, class_2_y, 'x')
 plt.plot(x_line, y_line, color='gray')
 plt.xlim(-3, 5)
 plt.ylim(-4, 2)
+plt.grid()
 
 plt.figure()
 
