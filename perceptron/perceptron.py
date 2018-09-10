@@ -50,6 +50,7 @@ plt.plot(x_line, y_line, color='gray')
 plt.xlim(-3, 5)
 plt.ylim(-4, 2)
 plt.grid()
+plt.savefig('perceptron/classification.png')
 
 plt.figure()
 
@@ -61,4 +62,6 @@ plt.plot(l, w2, label='w2')
 plt.xlim(0, 30)
 plt.grid()
 plt.legend()
+
+plt.savefig('perceptron/parameters.png')
 plt.show()
