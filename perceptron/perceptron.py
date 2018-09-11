@@ -15,7 +15,7 @@ from sklearn import datasets
 
 # データセット作成
 N = 100
-data, t = datasets.make_classification(n_features=2, n_redundant=0, n_informative=2, random_state=5, n_clusters_per_class=1, n_samples=N, n_classes=2)
+data, t = datasets.make_classification(n_features=2, n_redundant=0, n_informative=2, n_clusters_per_class=1, n_samples=N, n_classes=2)
 t = [1 if ele == 1 else -1 for ele in t]
 x, y = data.transpose()
 class_1_x, class_1_y = [x[i] for i in range(N) if t[i] == 1], [y[i] for i in range(N) if t[i] == 1]
@@ -59,7 +59,7 @@ w0, w1, w2 = np.array(param_hist).transpose()
 plt.plot(l, w0, label='w0')
 plt.plot(l, w1, label='w1')
 plt.plot(l, w2, label='w2')
-plt.xlim(0, 30)
+plt.xlim(0, loop)
 plt.grid()
 plt.legend()
 
