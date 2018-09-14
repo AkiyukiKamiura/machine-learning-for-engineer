@@ -15,10 +15,28 @@ from sklearn import datasets
 
 尤度関数を解析的に最大化することはできないため,
 ニュートン法の多次元拡張: ニュートンラフソン法 を用いる
+
+平面上のすべての点において、クラスに割り当てられる確率が計算されるため、
+ROC曲線を利用し、性能評価を定量的に行うことができる
+
+ROC曲線: Receiver Operating Characteristic 曲線
+真陽性と偽陽性の関係グラフ
 """
 
 def logistic_function(x):
-    return 1/(1 + math.exp(-x))
+    return 1/(1 + np.exp(-x))
+
+def roc(param, phi, t):
+    true_pos_list, false_pos_list = [], []
+    n = np.sum(t == 1)
+    p = logistic_function(np.dot(phi, param))
+    p_thres = np.linspace(0, 1)
+    for thr in p_thres:
+        true_pos = np.sum(np.logical_and(p >= thr, t == 1))
+        false_pos = np.sum(np.logical_and(p >= thr, t == 0))
+        true_pos_list.append(true_pos/n)
+        false_pos_list.append(false_pos/n)
+    return true_pos_list, false_pos_list
 
 # データセット作成
 N = 100
@@ -67,5 +85,14 @@ plt.xlim(0, len(param_hist)-1)
 plt.grid()
 plt.legend()
 plt.savefig('logistic_recursion/parameters.png')
+
+plt.figure()
+
+true_pos, false_pos = roc(param, phi, t)
+plt.plot(false_pos, true_pos, 'o--')
+plt.xlabel('false positive rate')
+plt.ylabel('true positive rate')
+plt.grid()
+plt.savefig('logistic_recursion/roc.png')
 
 plt.show()
